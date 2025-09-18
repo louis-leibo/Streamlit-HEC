@@ -10,17 +10,17 @@ def load_gps(
     encoding: str = "ISO-8859-1",
     season: str = "2023/2024",
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """
-    Load and preprocess GPS tracking data for training and matches.
+    """Load GPS CSV, parse dates, filter by season, derive HR zone seconds and helpers.
+
+    Returns the full dataframe and an "active" subset where distance > 0.
 
     Args:
-        file_path: Path to the GPS data CSV file
-        encoding: Character encoding of the CSV file
+        file_path: Path to the GPS data CSV file.
+        encoding: File encoding used to read the CSV.
+        season: Season label to filter the dataset (e.g., "2023/2024").
 
     Returns:
-        Tuple containing:
-            - Complete DataFrame with all GPS data
-            - Filtered DataFrame with only active training/match days (distance > 0)
+        Tuple[pd.DataFrame, pd.DataFrame]: (full_df, active_df)
     """
     df = pd.read_csv(file_path, encoding=encoding)
 
@@ -61,15 +61,14 @@ def load_physical_capabilities(
     file_path: str = "data/players_data/marc_cucurella/CFC Physical Capability Data.csv",
     season: str = "2023/2024",
 ) -> pd.DataFrame:
-    """
-    Load and preprocess physical capabilities assessment data.
+    """Load physical capabilities CSV, parse dates, coerce benchmarkPct, and filter by season.
 
     Args:
-        file_path: Path to the physical capabilities CSV file
-        preview: If True, display a preview of the data in the Streamlit app
+        file_path: Path to the physical capabilities CSV file.
+        season: Season window used to filter testDate.
 
     Returns:
-        DataFrame with preprocessed physical capabilities data
+        DataFrame sorted by testDate within the selected season.
     """
     df = pd.read_csv(file_path)
 
@@ -78,11 +77,13 @@ def load_physical_capabilities(
 
     if season == "2023/2024":
         df = df.loc[
-            (df["testDate"] >= pd.Timestamp("01/07/2023"))
-            & (df["testDate"] <= pd.Timestamp("30/06/2024"))
+            (df["testDate"] >= pd.to_datetime("01/07/2023", format="%d/%m/%Y"))
+            & (df["testDate"] <= pd.to_datetime("30/06/2024", format="%d/%m/%Y"))
         ]
     elif season == "2024/2025":
-        df = df.loc[df["testDate"] >= pd.Timestamp("01/07/2024")]
+        df = df.loc[
+            df["testDate"] >= pd.to_datetime("01/07/2024", format="%d/%m/%Y")
+        ]
     df = df.sort_values("testDate")
 
     return df
@@ -92,14 +93,16 @@ def load_recovery_status(
     file_path: str = "data/players_data/marc_cucurella/CFC Recovery status Data.csv",
     season: str = "2023/2024",
 ) -> pd.DataFrame:
-    """
-    Load and preprocess player recovery status data.
+    """Load recovery CSV, filter by season, parse dates, and derive helper columns.
+
+    Adds ISO week, month name, metric_type classification, and a base_metric name.
 
     Args:
-        file_path: Path to the recovery status CSV file
+        file_path: Path to the recovery status CSV file.
+        season: Season label to filter the dataset (e.g., "2023/2024").
 
     Returns:
-        DataFrame with preprocessed recovery status data
+        Preprocessed DataFrame sorted by sessionDate.
     """
     df = pd.read_csv(file_path)
     df = df[df["seasonName"] == season]
@@ -137,12 +140,14 @@ def load_recovery_status(
 
 
 def load_priority(path: str, encoding: str = "ISO-8859-1") -> pd.DataFrame:
-    """
-    Loads a CSV file into a Pandas DataFrame.
+    """Load a CSV with the given encoding and return it as a DataFrame.
 
-    :param path: Path to the CSV file.
-    :param encoding: Encoding format for reading the file (default: "ISO-8859-1").
-    :return: DataFrame containing the loaded data.
+    Args:
+        path: Filesystem path to the CSV file.
+        encoding: Text encoding to use when reading the file.
+
+    Returns:
+        Raw DataFrame read from the CSV.
     """
     df = pd.read_csv(path, encoding=encoding)
     return df
