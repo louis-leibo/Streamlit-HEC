@@ -115,11 +115,6 @@ pytest -q --maxfail=1 --disable-warnings --cov=src --cov-report=term-missing
 - For functions that read CSVs, use pytest tmp directories to generate small sample CSVs.
 - Keep visualizations thin: put data shaping in `src/*_viz.py` helpers that can be unit-tested, and call Plotly only at the boundary.
 
-5) Suggested next tests
-- `src/gps_viz.py`: unit test KPI calculators and clustering pre-processing.
-- `src/physical_viz.py`: test `calculate_kpis`, movement filters, and trend aggregations.
-- `src/recovery_viz.py`: test category aggregation, completeness handling, and time bucketing.
-
 
 ### Troubleshooting
 
