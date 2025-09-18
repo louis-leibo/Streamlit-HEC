@@ -45,7 +45,6 @@ def create_sidebar():
     with st.sidebar:
         st.title("FC Performance Insights")
         st.sidebar.image("images/chelsea.png", width=300)
-        st.sidebar.image("images/logo-eleven.png", width=300)
 
         st.subheader("Navigation")
         page = st.radio(
@@ -95,8 +94,8 @@ def create_sidebar():
             f"""
             <div style="
                 width: 290px;
-                padding: 10px; 
-                border-radius: 10px; 
+                padding: 10px;
+                border-radius: 10px;
                 display: inline-block;
                 border: 1px solid white;
             ">
@@ -115,10 +114,10 @@ def create_sidebar():
                 """
                 - **What is FC Performance Insights?**
                   - A platform to track and analyze football players' performance through metrics like injury history, physical capabilities, and recovery status.
-                
+
                 - **How can I use the platform?**
                   - Use the navigation menu above to explore different insights and analytics for players and teams.
-                
+
                 - **Can I customize the data for my team?**
                   - Yes, the platform allows personalized data input and analysis to optimize player performance.
                 """
@@ -176,11 +175,11 @@ def main():
         st.markdown(
             """
             ## Welcome to the FC Performance Insights Platform!
-            
+
             ### 11CFCInsights
-            
+
             This comprehensive platform offers elite football players and coaches a cutting-edge **Physical Performance Interface** that transforms how teams monitor and enhance player development.
-            
+
             Designed with both clarity and depth, 11CFCInsights combines technical sophistication with intuitive visualization to deliver actionable insights directly to your fingertips.
             """
         )
@@ -205,7 +204,7 @@ def main():
                 """
                 - **Games & Training Performance**: Track speed, distance, and movement patterns during matches and training
                 - **Physical Capabilities Analysis**: Monitor strength, power, and endurance metrics
-                - **Recovery Status Analysis**: Analyze sleep, nutrition, and physiological recovery indicators 
+                - **Recovery Status Analysis**: Analyze sleep, nutrition, and physiological recovery indicators
                 """
             )
 
