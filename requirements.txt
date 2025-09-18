@@ -1,0 +1,8 @@
+numpy
+pandas
+plotly==5.13.1
+lxml
+streamlit==1.43.2
+seaborn
+scikit-learn
+nbformat>=4.2.0
