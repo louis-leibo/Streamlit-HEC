@@ -87,3 +87,45 @@ Season filtering currently supports: `2023/2024`, `2024/2025`.
 - Use the sidebar to choose the season and player. The selected state is stored in Streamlit session state.
 - Tabs within each page reveal different perspectives of the same dataset (KPIs, trends, distributions, clustering, etc.).
 - Hover on Plotly figures to see interactive tooltips and export options.
+
+
+### Continuous Integration (CI) and Tests
+
+This repository supports automated tests using `pytest`, executed via GitHub Actions on every push and pull request.
+
+1) Local test run
+```bash
+pip install -r requirements.txt
+pip install pytest pytest-cov
+pytest -q --maxfail=1 --disable-warnings --cov=src --cov-report=term-missing
+```
+
+2) Test layout
+- `tests/`: unit tests (e.g., loaders in `src/data_preprocessing.py`)
+- `pyproject.toml`: pytest configuration (test paths, pythonpath)
+
+3) CI workflow
+- GitHub Actions workflow at `.github/workflows/ci.yml`:
+  - Sets up Python 3.10
+  - Installs dependencies from `requirements.txt` plus `pytest` packages
+  - Runs `pytest` with coverage
+
+4) Writing tests for new code
+- Favor pure functions in `src/` that accept inputs and return values without side effects.
+- For functions that read CSVs, use pytest tmp directories to generate small sample CSVs.
+- Keep visualizations thin: put data shaping in `src/*_viz.py` helpers that can be unit-tested, and call Plotly only at the boundary.
+
+5) Suggested next tests
+- `src/gps_viz.py`: unit test KPI calculators and clustering pre-processing.
+- `src/physical_viz.py`: test `calculate_kpis`, movement filters, and trend aggregations.
+- `src/recovery_viz.py`: test category aggregation, completeness handling, and time bucketing.
+
+
+### Troubleshooting
+
+- CI cannot find files
+  - Tests should write temporary CSVs under a tmp path and pass that path to loader functions.
+- Import errors in tests
+  - Ensure `pythonpath` in `pyproject.toml` includes `src` and project root.
+- Plotly/Streamlit not needed in tests
+  - Keep tests focused on data manipulation; avoid rendering components.

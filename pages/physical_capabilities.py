@@ -16,6 +16,7 @@ from src.physical_viz import (
 
 
 def show():
+    """Display physical capability KPIs, movement analysis, trends, and recent results."""
     st.title("Physical Capabilities")
 
     try:
@@ -92,7 +93,7 @@ def show():
         with tab2:
             st.subheader("Movement Breakdown")
             st.markdown(
-                """ 
+                """
             This graph provides a monthly breakdown of physical performance tests by movement type, such as agility, jump, sprint, and upper body movements.
             The dropdown allows you to select a specific movement type, displaying the average benchmark percentile for that type on the right.
                 """
@@ -124,11 +125,11 @@ def show():
             # Performance by movement - simplified chart
             st.subheader("Movement Performance")
             st.markdown(
-                """ 
+                """
             This chart shows the average benchmark performance by movement type (agility, jump, sprint, upper body), along with error bars indicating variability in the results.
             The height of each bar represents the mean benchmark percentile across all tests of that movement.
             Error bars show one standard deviation above and below the mean, capturing performance consistency.
-            The number of tests with available data is shown as a label above each bar.    
+            The number of tests with available data is shown as a label above each bar.
             """
             )
             fig_movement_perf = create_movement_performance_chart(df_filtered)
@@ -137,7 +138,7 @@ def show():
             # Performance by movement - over time
             st.subheader("Movement Performance Trends over the last 5 months")
             st.markdown(
-                """ 
+                """
             This graph displays movement performance trends over the last five months, showing how the average benchmark percentile has evolved for each movement type: agility, jump, sprint, and upper body.
             """
             )

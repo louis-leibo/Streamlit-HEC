@@ -14,6 +14,7 @@ st.set_page_config(
 
 
 def load_players():
+    """Load the player registry from data/players.json and return the players mapping."""
     with open("data/players.json", "r") as f:
         player_data = json.load(f)
     return player_data["players"]
@@ -42,6 +43,7 @@ if "selected_season" not in st.session_state:
 
 
 def create_sidebar():
+    """Render the sidebar with navigation, season/player selectors, and player info card."""
     with st.sidebar:
         st.title("FC Performance Insights")
         st.sidebar.image("images/chelsea.png", width=300)
@@ -130,10 +132,12 @@ def create_sidebar():
 
 
 def get_player_data_path(player_id):
+    """Return the path to a player's data directory based on the player_id."""
     return f"data/players_data/{player_id}"
 
 
 def main():
+    """Entry point: apply theme, render sidebar, and route to the selected page."""
     st.markdown(
         """
         <style>

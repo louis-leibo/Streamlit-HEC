@@ -24,6 +24,7 @@ from src.recovery_viz import (
 
 
 def show():
+    """Display recovery trends, load interactions, category analysis, and weekly patterns."""
     st.title("Recovery Status")
 
     try:
@@ -75,8 +76,8 @@ def show():
             # Global recovery score
             st.subheader("Recovery Summary")
             st.markdown(
-                """ 
-            This graph shows the evolution of the global recovery score over time, combining daily recovery values and a 7-day moving average. 
+                """
+            This graph shows the evolution of the global recovery score over time, combining daily recovery values and a 7-day moving average.
             The blue line with markers represents the raw emboss_baseline_score collected each day, while the bold orange line smooths these fluctuations.
             """
             )
@@ -86,8 +87,8 @@ def show():
             # Recovery metrics by category - simplified view
             st.subheader("Recovery by Category")
             st.markdown(
-                """ 
-            This multi-panel figure shows time series plots of recovery data by category, highlighting both data completeness (solid lines) and composite scores (dotted lines) over time. 
+                """
+            This multi-panel figure shows time series plots of recovery data by category, highlighting both data completeness (solid lines) and composite scores (dotted lines) over time.
                         Each subplot corresponds to a specific recovery category like sleep, soreness, or subjective
             """
             )
@@ -185,8 +186,8 @@ def show():
             st.markdown(
                 """
                 **Impact Legend (based on drop in recovery score after match):**
-                - 🟥 **High Impact**: Drop > 0.3 &nbsp; → &nbsp; **Red line** — intense effort or low post-match recovery  
-                - 🟨 **Moderate Impact**: Drop between 0.1 and 0.3 &nbsp; → &nbsp; **Amber line** — manageable fatigue  
+                - 🟥 **High Impact**: Drop > 0.3 &nbsp; → &nbsp; **Red line** — intense effort or low post-match recovery
+                - 🟨 **Moderate Impact**: Drop between 0.1 and 0.3 &nbsp; → &nbsp; **Amber line** — manageable fatigue
                 - 🟩 **Low Impact**: Drop < 0.1 &nbsp; → &nbsp; **Green line** — good resilience or light match load
                 """,
                 unsafe_allow_html=True,
@@ -230,8 +231,8 @@ def show():
                 st.subheader("Completeness by Category")
                 st.markdown(
                     """
-                This bar chart shows the average data completeness across recovery categories such as sleep, soreness, subjective, and various musculoskeletal metrics. 
-                Each bar represents the proportion of days where data was available for that category, giving a snapshot of data coverage over time. 
+                This bar chart shows the average data completeness across recovery categories such as sleep, soreness, subjective, and various musculoskeletal metrics.
+                Each bar represents the proportion of days where data was available for that category, giving a snapshot of data coverage over time.
                 It's useful for identifying which wellness domains are consistently tracked and which may need improved data collection practices—e.g. “subjective” has the highest completeness, while bio and msk_load_tolerance are less consistently recorded."""
                 )
                 if not completeness_df.empty:
@@ -271,8 +272,8 @@ def show():
             st.subheader("Weekly recovery heatmap")
             st.markdown(
                 """
-            This heatmap visualizes how recovery scores vary by day and week. 
-            Each row represents a week (e.g., 2024-W14) and each column a day of the week, with color indicating the average emboss_baseline_score for that day. 
+            This heatmap visualizes how recovery scores vary by day and week.
+            Each row represents a week (e.g., 2024-W14) and each column a day of the week, with color indicating the average emboss_baseline_score for that day.
             Green tones reflect higher recovery, while red indicates poor recovery."""
             )
             weekly_heatmap = plot_weekly_recovery_heatmap(df)
@@ -282,7 +283,7 @@ def show():
             st.subheader("Weekly Risk Assessment")
             st.markdown(
                 """
-            This chart shows a weekly summary of training overload risk, based on how many days per week the player's load was among the top 10% (most demanding). 
+            This chart shows a weekly summary of training overload risk, based on how many days per week the player's load was among the top 10% (most demanding).
             The function computes a danger threshold from GPS-derived load scores, then counts how many days per week exceed that threshold. This helps visualize how frequently the player hits risky load zones.
             """
             )

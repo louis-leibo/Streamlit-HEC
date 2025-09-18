@@ -18,6 +18,7 @@ from src.gps_viz import (
 
 
 def show():
+    """Display GPS KPIs, per-match analysis, training+match load, and clustering views."""
     st.title("GPS Data Exploration")
 
     try:
@@ -170,9 +171,9 @@ def show():
             # Simple distribution chart
             st.subheader("Match Overview : Distance by Duration")
             st.markdown(
-                """ 
-            This graph shows a distribution of total distance covered during matches. 
-            It visualizes how far players tend to run depending on how long they play. 
+                """
+            This graph shows a distribution of total distance covered during matches.
+            It visualizes how far players tend to run depending on how long they play.
             Each bar represents the count of matches falling into a specific distance range, and the chart overlays mean (dashed) and median (solid) distance markers for each duration group.
             """
             )
@@ -226,7 +227,7 @@ def show():
             st.subheader("Load Over Time")
             st.markdown(
                 """
-            This chart tracks the player’s daily training load over time. Training load is calculated using a composite formula that combines distance, high-speed distance, and accel/decel counts, each passed through a sigmoid transformation and weighted by coefficients (α, β, γ). 
+            This chart tracks the player’s daily training load over time. Training load is calculated using a composite formula that combines distance, high-speed distance, and accel/decel counts, each passed through a sigmoid transformation and weighted by coefficients (α, β, γ).
             This approach gives a normalized intensity score that reflects both volume and intensity of physical effort across sessions."""
             )
             fig_load_time = plot_load_over_time(
@@ -243,12 +244,12 @@ def show():
             st.subheader("Performance Clusters")
 
             st.markdown(
-                """ 
-            This visualization displays training session performance clusters based on selected physical metrics, using K-Means clustering. 
-            Each point represents a training session, categorized into Lower, Usual, or Better performance levels, based on patterns in the data. 
+                """
+            This visualization displays training session performance clusters based on selected physical metrics, using K-Means clustering.
+            Each point represents a training session, categorized into Lower, Usual, or Better performance levels, based on patterns in the data.
             The clustering is computed using five features: distance, distance_over_24, accel_decel_over_3_5, peak_speed, and hr_zone_4_hms, which are scaled and grouped into three clusters.
 
-            Users can select any two features to explore performance groupings—common and effective combinations include distance vs peak_speed or distance vs accel_decel_over_3_5, as these best reflect both volume and intensity. 
+            Users can select any two features to explore performance groupings—common and effective combinations include distance vs peak_speed or distance vs accel_decel_over_3_5, as these best reflect both volume and intensity.
             The plot helps identify outliers, track training quality over time, and guide workload adjustments based on the underlying performance profile.
             """
             )
@@ -302,7 +303,7 @@ def show():
             st.subheader("Performance Timeline")
             st.markdown(
                 """
-            This timeline displays performance clusters over time, categorizing each session into Better, Usual, or Lower performances based on k-means clustering of key physical metrics (described in previous graph's decription). 
+            This timeline displays performance clusters over time, categorizing each session into Better, Usual, or Lower performances based on k-means clustering of key physical metrics (described in previous graph's decription).
             Each point represents a training or match session, with shapes distinguishing the session type and colors indicating the performance level.
             This visualization helps identify periods of high or low performance, track consistency, and detect performance trends across the season.
             """
