@@ -1,4 +1,4 @@
-# eleven strategy - FC Performance Insights
+# FC Performance Insights
 
 ## Overview
 
@@ -35,9 +35,3 @@ pip install -r requirements.txt
 ```bash
 streamlit run main.py
 ```
-
-
-## Contact and supprt : 
-For issues or inquiries, reach out to:
-- remi.jaylet@eleven-strategy.com
-- marc-antoine.samson@eleven-strategy.com
